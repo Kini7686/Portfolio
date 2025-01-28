@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1440, maximum-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://animaproject.s3.amazonaws.com/home/favicon.png"
+    />
+    <meta name="og:type" content="website" />
+    <meta name="twitter:card" content="photo" />
+    <!-- <script id="anima-load-script" src="load.js"></script> -->
+    <!-- <script id="anima-hotspots-script" src="hotspots.js"></script> -->
+    <!-- <script id="anima-overrides-script" src="overrides.js"></script> -->
+    <script src="https://animaapp.s3.amazonaws.com/js/timeline.js"></script>
+    <style>
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+      @import url("https://fonts.googleapis.com/css?family=Inter:700,400|Charmonman:700|Jacques+Francois:400");
+
+      /* The following line is used to measure usage of this code. You can remove it if you want. */
+      @import url("https://px.animaapp.com/6782f8cd04a6d931cb804a40.6782f8ce04a6d931cb804a43.SfkEwUE.hch.png");
+
+      .screen textarea:focus,
+      .screen input:focus {
+        outline: none;
+      }
+
+      .screen * {
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+      }
+
+      .screen div {
+        -webkit-text-size-adjust: none;
+      }
+
+      .component-wrapper a {
+        display: contents;
+        pointer-events: auto;
+        text-decoration: none;
+      }
+
+      .component-wrapper * {
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+        pointer-events: none;
+      }
+
+      .component-wrapper a *,
+      .component-wrapper input,
+      .component-wrapper video,
+      .component-wrapper iframe {
+        pointer-events: auto;
+      }
+
+      .component-wrapper.not-ready,
+      .component-wrapper.not-ready * {
+        visibility: hidden !important;
+      }
+
+      .screen a {
+        display: contents;
+        text-decoration: none;
+      }
+
+      .full-width-a {
+        width: 100%;
+      }
+
+      .full-height-a {
+        height: 100%;
+      }
+
+      .container-center-vertical {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .container-center-vertical > * {
+        flex-shrink: 0;
+        pointer-events: auto;
+      }
+
+      .container-center-horizontal {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        pointer-events: none;
+        width: 100%;
+      }
+
+      .container-center-horizontal > * {
+        flex-shrink: 0;
+        pointer-events: auto;
+      }
+
+      .auto-animated div {
+        --z-index: -1;
+        opacity: 0;
+        position: absolute;
+      }
+
+      .auto-animated input {
+        --z-index: -1;
+        opacity: 0;
+        position: absolute;
+      }
+
+      .auto-animated .container-center-vertical,
+      .auto-animated .container-center-horizontal {
+        opacity: 1;
+      }
+
+      .overlay-base {
+        display: none;
+        height: 100%;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      .overlay-base.animate-appear {
+        align-items: center;
+        animation: reveal 0.3s ease-in-out 1 normal forwards;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+      }
+
+      .overlay-base.animate-disappear {
+        animation: reveal 0.3s ease-in-out 1 reverse forwards;
+        display: block;
+        opacity: 1;
+        pointer-events: none;
+      }
+
+      .overlay-base.animate-disappear * {
+        pointer-events: none;
+      }
+
+      @keyframes reveal {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .animate-nodelay {
+        animation-delay: 0s;
+      }
+
+      .align-self-flex-start {
+        align-self: flex-start;
+      }
+
+      .align-self-flex-end {
+        align-self: flex-end;
+      }
+
+      .align-self-flex-center {
+        align-self: flex-center;
+      }
+
+      .valign-text-middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .valign-text-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      input:focus {
+        outline: none;
+      }
+
+      .listeners-active,
+      .listeners-active * {
+        pointer-events: auto;
+      }
+
+      .hidden,
+      .hidden * {
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      .smart-layers-pointers,
+      .smart-layers-pointers * {
+        pointer-events: auto;
+        visibility: visible;
+      }
+
+      .listeners-active-click,
+      .listeners-active-click * {
+        cursor: pointer;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        --black: #000000;
+        --black-2: #0000000d;
+        --black-3: #000000d1;
+        --purple-heart: #5e30cb;
+        --white: #ffffff;
+
+        --font-size-l: 24px;
+        --font-size-m: 20px;
+        --font-size-s: 16px;
+        --font-size-xl: 32px;
+        --font-size-xxl: 40px;
+        --font-size-xxxl: 64px;
+
+        --font-family-charmonman: "Charmonman", Helvetica;
+        --font-family-inter: "Inter", Helvetica;
+        --font-family-jacques_francois: "Jacques Francois", Helvetica;
+      }
+      .inter-normal-black-20px {
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      .inter-bold-black-20px {
+        color: var(--black-3);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .inter-bold-black-32px {
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-xl);
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .inter-normal-purple-heart-20px {
+        color: var(--purple-heart);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      .inter-normal-black-16px {
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-s);
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      .inter-bold-black-40px {
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-xxl);
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .inter-bold-black-24px {
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-l);
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .inter-normal-white-24px {
+        color: var(--white);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-l);
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      :root {
+      }
+
+      /* screen - desktop-1 */
+
+      .desktop-1 {
+        background-color: var(--white);
+        height: 7402px;
+        overflow: hidden;
+        overflow-x: hidden;
+        position: relative;
+        width: 1440px;
+      }
+
+      .desktop-1 .rectangle-12-Ys8k0x {
+        background-color: var(--black);
+        height: 103px;
+        left: 0px;
+        position: absolute;
+        top: 7299px;
+        width: 1440px;
+      }
+
+      .desktop-1 .aditya-subhash-kini-Ys8k0x {
+        background-color: transparent;
+        color: var(--white);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-xl);
+        font-style: normal;
+        font-weight: 700;
+        height: auto;
+        left: 544px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 7332px;
+        width: auto;
+      }
+
+      .desktop-1 .contact-me-Ys8k0x {
+        height: 328px;
+        left: 120px;
+        top: 6911px;
+        width: 1084px;
+      }
+
+      .desktop-1 .gmail_icon_2020svg-GxPxir {
+        background-color: transparent;
+        height: 80px;
+        left: 0px;
+        position: absolute;
+        top: 108px;
+        width: 80px;
+      }
+
+      .desktop-1 .linked-in_logo_initials-GxPxir {
+        background-color: transparent;
+        height: 80px;
+        left: 0px;
+        position: absolute;
+        top: 248px;
+        width: 80px;
+      }
+
+      .desktop-1 .microsoft_-office_-o-GxPxir {
+        background-color: transparent;
+        height: 80px;
+        left: 773px;
+        position: absolute;
+        top: 109px;
+        width: 80px;
+      }
+
+      .desktop-1 .github-logo-png_seeklogo-304612-GxPxir {
+        height: 80px;
+        left: 773px;
+        top: 248px;
+        width: 80px;
+      }
+
+      .desktop-1 .adityakini7686gmailcom-GxPxir {
+        background-color: transparent;
+        height: auto;
+        left: 104px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 134px;
+        width: auto;
+      }
+
+      .desktop-1 .aditya-kini-GxPxir {
+        background-color: transparent;
+        height: auto;
+        left: 104px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 274px;
+        width: auto;
+      }
+
+      .desktop-1 .akini01syredu-GxPxir {
+        background-color: transparent;
+        height: auto;
+        left: 877px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 135px;
+        width: auto;
+      }
+
+      .desktop-1 .kini7686-GxPxir {
+        background-color: transparent;
+        height: auto;
+        left: 877px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 274px;
+        width: auto;
+      }
+
+      .desktop-1 .contact-me-GxPxir {
+        height: auto;
+        left: 486px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .skills-Ys8k0x {
+        height: 824px;
+        left: 0px;
+        top: 6031px;
+        width: 1442px;
+      }
+
+      .desktop-1 .dalle-2024-12-01-210-s6Xmfc {
+        background-color: transparent;
+        height: 720px;
+        left: 0px;
+        object-fit: cover;
+        position: absolute;
+        top: 104px;
+        width: 1440px;
+      }
+
+      .desktop-1 .skills-row-1-s6Xmfc {
+        background-color: transparent;
+        height: 160px;
+        left: 60px;
+        position: absolute;
+        top: 144px;
+        width: 1320px;
+      }
+
+      .desktop-1 .amazon_-web_-services-logowine-2MmFjr {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .aws-2MmFjr {
+        background-color: transparent;
+        height: auto;
+        left: 36px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .dalle-2024-12-01-205-gjOMSd {
+        height: 100px;
+        left: 10px;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .vapt-gjOMSd {
+        background-color: transparent;
+        height: auto;
+        left: 32px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .html5_logo_and_wordmarksvg-fOr5hl {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .html-fOr5hl {
+        background-color: transparent;
+        height: auto;
+        left: 31px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .x180910-css3-OGfFsB {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .css-OGfFsB {
+        background-color: transparent;
+        height: auto;
+        left: 39px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .x82a2188c985ce75402ae44fc43fe7e5e-yEIAOp {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .python-yEIAOp {
+        background-color: transparent;
+        height: auto;
+        left: 25px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .java-script-logo-TMt3uq {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .java-script-TMt3uq {
+        background-color: transparent;
+        height: auto;
+        left: 7px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .mongodb-logo-Q2xPyp {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .mongo-db-Q2xPyp {
+        background-color: transparent;
+        height: auto;
+        left: 12px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .skills-row-3-s6Xmfc {
+        background-color: transparent;
+        height: 160px;
+        left: 60px;
+        position: absolute;
+        top: 624px;
+        width: 1320px;
+      }
+
+      .desktop-1 .react-iconsvg-oqcLGJ {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .react-js-oqcLGJ {
+        background-color: transparent;
+        height: auto;
+        left: 19px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .sflogo-dYJu46 {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .wireshark-dYJu46 {
+        background-color: transparent;
+        height: auto;
+        left: 9px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .word-presscom-logowine-cUbFzr {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .word-press-cUbFzr {
+        background-color: transparent;
+        height: auto;
+        left: 6px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .x103144151-e4e80780-4-EUvuAe {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .haskell-EUvuAe {
+        background-color: transparent;
+        height: auto;
+        left: 24px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .java_programming_language_logosvg-2z4NEZ {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .java-2z4NEZ {
+        background-color: transparent;
+        height: auto;
+        left: 37px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .git_iconsvg-fehTlY {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .git-fehTlY {
+        background-color: transparent;
+        height: auto;
+        left: 45px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .github-logo-png_seeklogo-304612-qGwxmS {
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .git-hub-qGwxmS {
+        background-color: transparent;
+        height: auto;
+        left: 25px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .skills-row-2-s6Xmfc {
+        background-color: transparent;
+        height: 160px;
+        left: 160px;
+        position: absolute;
+        top: 384px;
+        width: 1120px;
+      }
+
+      .desktop-1 .php-logosvg-eO6jYM {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .php-eO6jYM {
+        background-color: transparent;
+        height: auto;
+        left: 39px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .my-sql-logowine-iXnhav {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .my-sql-iXnhav {
+        background-color: transparent;
+        height: auto;
+        left: 24px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .x85f69649-5387-44c2-b-1zo1MZ {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .figma-1zo1MZ {
+        background-color: transparent;
+        height: auto;
+        left: 30px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .c_-logo-jEjKOF {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .c-jEjKOF {
+        left: 52px;
+      }
+
+      .desktop-1 .cpp_logo-ghy84x {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .c-ghy84x {
+        left: 39px;
+      }
+
+      .desktop-1 .jupyter_logosvg-y3uuAN {
+        background-color: transparent;
+        height: 100px;
+        left: 10px;
+        position: absolute;
+        top: 8px;
+        width: 100px;
+      }
+
+      .desktop-1 .jupyter-y3uuAN {
+        background-color: transparent;
+        height: auto;
+        left: 22px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .skills-s6Xmfc {
+        height: auto;
+        left: 651px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .postion-of-responsibility-Ys8k0x {
+        background-color: transparent;
+        height: 919px;
+        left: 121px;
+        position: absolute;
+        top: 5066px;
+        width: 1330px;
+      }
+
+      .desktop-1 .rk-broadband-mxW1Rc {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 556px;
+        width: 1204px;
+      }
+
+      .desktop-1 .certificate-H4voPY {
+        left: 0px;
+        top: 323px;
+      }
+
+      .desktop-1 .dalle-2024-12-01-214-H4voPY {
+        left: 671px;
+      }
+
+      .desktop-1 .senior-manager-rk-br-H4voPY {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .span0-ox89iB {
+      }
+
+      .desktop-1 .span1-ox89iB {
+      }
+
+      .desktop-1 .may-2019-apr-2021-H4voPY {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 39px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .conducted-router-mon-H4voPY {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .finance-head-csi-mxW1Rc {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 108px;
+        width: 1336px;
+      }
+
+      .desktop-1 .certificate-mwGuaO {
+        left: 671px;
+        top: 299px;
+      }
+
+      .desktop-1 .dalle-2024-12-01-214-mwGuaO {
+        left: 0px;
+      }
+
+      .desktop-1 .finance-head-csi-slrtce-mwGuaO {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: 657px;
+      }
+
+      .desktop-1 .span0-QlR1Go {
+      }
+
+      .desktop-1 .span1-QlR1Go {
+      }
+
+      .desktop-1 .may-2021-apr2022-mwGuaO {
+        top: 39px;
+      }
+
+      .desktop-1 .managed-the-committe-mwGuaO {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .positions-of-responsibility-mxW1Rc {
+        background-color: transparent;
+        height: auto;
+        left: 288px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .publication-Ys8k0x {
+        height: 471px;
+        left: 121px;
+        top: 4549px;
+        width: 1198px;
+      }
+
+      .desktop-1 .pub-6YFYgR {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 108px;
+        width: 1196px;
+      }
+
+      .desktop-1 .publication-2-lBisNW {
+        background-color: transparent;
+        height: 363px;
+        left: 671px;
+        position: absolute;
+        top: 0px;
+        width: 529px;
+      }
+
+      .desktop-1 .rectangle-9-Z1Skk5 {
+        background-color: #0707070a;
+        border-radius: 18px;
+        box-shadow: 8px 8px 14px 1px #00000040;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .span0-yMTPKA {
+        font-style: normal;
+      }
+
+      .desktop-1 .span1-yMTPKA {
+        color: #ff0606;
+        font-style: normal;
+      }
+
+      .desktop-1 .span2-yMTPKA {
+        font-style: normal;
+      }
+
+      .desktop-1 .publication-1-lBisNW {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 529px;
+      }
+
+      .desktop-1 .rectangle-6-qIGQ6T {
+        background-color: #0707070a;
+        border-radius: 18px;
+        box-shadow: 8px 8px 14px 1px #00000040;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .span0-nFjAu0 {
+        font-style: normal;
+      }
+
+      .desktop-1 .span1-nFjAu0 {
+        color: #fe0000;
+        font-style: normal;
+      }
+
+      .desktop-1 .span2-nFjAu0 {
+        font-style: normal;
+      }
+
+      .desktop-1 .publication-6YFYgR {
+        height: auto;
+        left: 464px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .project-Ys8k0x {
+        background-color: transparent;
+        height: 2153px;
+        left: 121px;
+        position: absolute;
+        top: 2350px;
+        width: 1330px;
+      }
+
+      .desktop-1 .geo-location-7ro0tq {
+        height: 363px;
+        left: 0px;
+        top: 1366px;
+        width: 1336px;
+      }
+
+      .desktop-1 .read-more-HXaivh {
+        left: 671px;
+        top: 323px;
+      }
+
+      .desktop-1 .dalle-2024-12-01-204-HXaivh {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .geo-location-HXaivh {
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        width: 657px;
+      }
+
+      .desktop-1 .nov-2020-apr-2021-HXaivh {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 39px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .enables-real-time-lo-HXaivh {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .voice-assistant-for-7ro0tq {
+        height: 363px;
+        top: 947px;
+        width: 1204px;
+      }
+
+      .desktop-1 .read-more-XTE8Mq {
+        left: 0px;
+        top: 314px;
+      }
+
+      .desktop-1 .voice-assistant-for-XTE8Mq {
+        height: auto;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        width: 659px;
+      }
+
+      .desktop-1 .may-2020-apr-2021-XTE8Mq {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 78px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .constructed-a-python-XTE8Mq {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 126px;
+        width: 559px;
+      }
+
+      .desktop-1 .voice-assistant-for-ey77kX {
+        height: 368px;
+        top: 1785px;
+        width: 1202px;
+      }
+
+      .desktop-1 .read-more-7TaRNP {
+        left: 0px;
+        top: 344px;
+      }
+
+      .desktop-1 .dalle-2024-12-01-205-7TaRNP {
+        height: 363px;
+        left: 671px;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .stegnography-7TaRNP {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: 659px;
+      }
+
+      .desktop-1 .hide-secret-messages-7TaRNP {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 63px;
+        width: 559px;
+      }
+
+      .desktop-1 .house-and-car-price-7ro0tq {
+        height: 363px;
+        left: 0px;
+        top: 528px;
+        width: 1336px;
+      }
+
+      .desktop-1 .read-more-LxpVQw {
+        left: 671px;
+        top: 338px;
+      }
+
+      .desktop-1 .dalle-2024-11-27-014-LxpVQw {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .house-and-car-price-LxpVQw {
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        width: 657px;
+      }
+
+      .desktop-1 .may-2021-apr2022-LxpVQw {
+        top: 78px;
+      }
+
+      .desktop-1 .created-a-web-applic-LxpVQw {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 126px;
+        width: 559px;
+      }
+
+      .desktop-1 .osint-automation-application-7ro0tq {
+        height: 363px;
+        top: 108px;
+        width: 1204px;
+      }
+
+      .desktop-1 .read-more-lLsFAR {
+        left: 0px;
+        top: 299px;
+      }
+
+      .desktop-1 .osint-automation-application-lLsFAR {
+        height: auto;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .may-2022-apr-2023-lLsFAR {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 39px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .developed-an-efficie-lLsFAR {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .projects-7ro0tq {
+        background-color: transparent;
+        height: auto;
+        left: 492px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .work-experience-Ys8k0x {
+        height: 1309px;
+        left: 121px;
+        top: 995px;
+        width: 1235px;
+      }
+
+      .desktop-1 .aws-intern-rJ2J6T {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 946px;
+        width: 1239px;
+      }
+
+      .desktop-1 .aws-internship-cloud-intern-slrtce-VvcezU {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .span0-fuhDAV {
+      }
+
+      .desktop-1 .span1-fuhDAV {
+      }
+
+      .desktop-1 .jul-2022-aug-2022-VvcezU {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 39px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .created-an-aws-proje-VvcezU {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .cyber-security-intern-rJ2J6T {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 527px;
+        width: 1202px;
+      }
+
+      .desktop-1 .resized_image_525x363-LgsPCY {
+        background-color: transparent;
+        height: 363px;
+        left: 671px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .cyber-security-intern-slrtce-LgsPCY {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .span0-ivHDqJ {
+      }
+
+      .desktop-1 .span1-ivHDqJ {
+      }
+
+      .desktop-1 .nov-2022-jan-2023-LgsPCY {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 39px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .acquired-knowledge-o-LgsPCY {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .uiux-intern-rJ2J6T {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 108px;
+        width: 1236px;
+      }
+
+      .desktop-1 .uiux-intern-basket-h-HaWVKk {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .span0-oOoAqn {
+      }
+
+      .desktop-1 .span1-oOoAqn {
+      }
+
+      .desktop-1 .sep-2023-nov-2023-HaWVKk {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 39px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .designed-and-prototy-HaWVKk {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 87px;
+        width: 559px;
+      }
+
+      .desktop-1 .work-experience-rJ2J6T {
+        height: auto;
+        left: 408px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .education-Ys8k0x {
+        height: 355px;
+        left: 121px;
+        top: 594px;
+        width: 1198px;
+      }
+
+      .desktop-1 .syracuse-university-ltTaF9 {
+        height: 275px;
+        left: 0px;
+        top: 80px;
+        width: 533px;
+      }
+
+      .desktop-1 .syracuse-university-DNxZhy {
+        height: auto;
+        left: 105px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 133px;
+        width: auto;
+      }
+
+      .desktop-1 .masters-of-computer-science-DNxZhy {
+        background-color: transparent;
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 700;
+        height: auto;
+        left: 115px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 179px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .gpa-4040-DNxZhy {
+        background-color: transparent;
+        height: auto;
+        left: 14px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 210px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .aug-2024-may-2026-DNxZhy {
+        background-color: transparent;
+        height: auto;
+        left: 14px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 236px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .university-of-mumbai-ltTaF9 {
+        height: 275px;
+        left: 671px;
+        top: 80px;
+        width: 533px;
+      }
+
+      .desktop-1 .university-of-mumbai-TqhPAF {
+        height: auto;
+        left: 105px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 133px;
+        width: auto;
+      }
+
+      .desktop-1 .bachelors-of-enginee-TqhPAF {
+        background-color: transparent;
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 700;
+        height: auto;
+        left: 14px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 179px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .gpa-88910-TqhPAF {
+        background-color: transparent;
+        height: auto;
+        left: 14px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 210px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .aug-2019-may-2023-TqhPAF {
+        background-color: transparent;
+        height: auto;
+        left: 14px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 236px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .education-ltTaF9 {
+        height: auto;
+        left: 480px;
+        letter-spacing: 0px;
+        line-height: normal;
+        text-align: left;
+        top: 0px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .dalle-2024-11-28-191-Ys8k0x {
+        background-color: transparent;
+        height: 548px;
+        left: 0px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 1440px;
+      }
+
+      .desktop-1 .rectangle-13-Ys8k0x {
+        background-color: #0000006e;
+        height: 548px;
+        left: 1px;
+        position: absolute;
+        top: 0px;
+        width: 1440px;
+      }
+
+      .desktop-1 .about-Ys8k0x {
+        background-color: transparent;
+        height: 248px;
+        left: 207px;
+        position: absolute;
+        top: 174px;
+        width: 1002px;
+      }
+
+      .desktop-1 .im-9YZhBH {
+        background-color: transparent;
+        color: var(--white);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-xl);
+        font-style: normal;
+        font-weight: 400;
+        height: auto;
+        left: 492px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .title-9YZhBH {
+        background-color: transparent;
+        color: var(--white);
+        font-family: var(--font-family-charmonman);
+        font-size: var(--font-size-xxxl);
+        font-style: normal;
+        font-weight: 700;
+        height: auto;
+        left: 343px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 36px;
+        width: auto;
+      }
+
+      .desktop-1 .software-developer-w-9YZhBH {
+        background-color: transparent;
+        color: var(--white);
+        font-family: var(--font-family-jacques_francois);
+        font-size: var(--font-size-xl);
+        font-style: normal;
+        font-weight: 400;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 150px;
+        width: auto;
+      }
+
+      .desktop-1 .syracuse-ny-9YZhBH {
+        background-color: transparent;
+        color: var(--white);
+        font-family: var(--font-family-jacques_francois);
+        font-size: var(--font-size-xl);
+        font-style: normal;
+        font-weight: 400;
+        height: auto;
+        left: 411px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 206px;
+        width: auto;
+      }
+
+      .desktop-1 .navbar-Ys8k0x {
+        background-color: transparent;
+        height: 29px;
+        left: 928px;
+        position: absolute;
+        top: 58px;
+        width: 428px;
+      }
+
+      .desktop-1 .home-bUOcCU {
+        background-color: transparent;
+        height: auto;
+        left: 0px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .contact-bUOcCU {
+        background-color: transparent;
+        height: auto;
+        left: 150px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+
+      .desktop-1 .resume-bUOcCU {
+        background-color: transparent;
+        height: auto;
+        left: 331px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        width: auto;
+      }
+      .desktop-1 .resume-bUOcCU:hover{
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .desktop-1 .dalle-2024-11-28-192-Ys8k0x {
+        background-color: transparent;
+        height: 80px;
+        left: 20px;
+        object-fit: cover;
+        position: absolute;
+        top: 20px;
+        width: 78px;
+      }
+
+      .desktop-1 .c {
+        background-color: transparent;
+        height: auto;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 124px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .certificate {
+        background-color: transparent;
+        height: auto;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .contact-me {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .dalle-2024-11-27-015 {
+        background-color: transparent;
+        height: 363px;
+        left: 671px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .dalle-2024-11-27-025 {
+        background-color: transparent;
+        height: 189px;
+        left: 41px;
+        object-fit: cover;
+        position: absolute;
+        top: 21px;
+        width: 442px;
+      }
+
+      .desktop-1 .dalle-2024-12-01-205 {
+        background-color: transparent;
+        object-fit: cover;
+        position: absolute;
+      }
+
+      .desktop-1 .dalle-2024-12-01-214 {
+        background-color: transparent;
+        height: 363px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .education {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .geo-location {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .github-logo-png_seeklogo-304612 {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .house-and-car-price {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .link {
+        background-color: transparent;
+        height: auto;
+        left: 28px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 321px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .may-2021-apr2022 {
+        background-color: transparent;
+        height: auto;
+        left: 671px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .osint-automation-application {
+        background-color: transparent;
+        left: 0px;
+        position: absolute;
+      }
+
+      .desktop-1 .publication {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .published-a-paper-on {
+        background-color: transparent;
+        color: transparent;
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-s);
+        font-style: normal;
+        font-weight: 400;
+        height: auto;
+        left: 28px;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        top: 231px;
+        width: 469px;
+      }
+
+      .desktop-1 .read-more {
+        background-color: transparent;
+        height: auto;
+        letter-spacing: 0px;
+        line-height: normal;
+        position: absolute;
+        text-align: left;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .desktop-1 .rectangle-11 {
+        background-color: var(--black-2);
+        height: 160px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 120px;
+      }
+
+      .desktop-1 .rectangle-3 {
+        background-color: #0706060a;
+        border-radius: 16px;
+        box-shadow: 8px 8px 14px 1px #00000040;
+        height: 275px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .rectangle-4 {
+        background-color: transparent;
+        height: 363px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+
+      .desktop-1 .skill-1 {
+        background-color: transparent;
+        height: 160px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skill-2 {
+        background-color: transparent;
+        height: 160px;
+        left: 1200px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skill-3 {
+        background-color: transparent;
+        height: 160px;
+        left: 200px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skill-4 {
+        background-color: transparent;
+        height: 160px;
+        left: 400px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skill-5 {
+        background-color: transparent;
+        height: 160px;
+        left: 600px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skill-6 {
+        background-color: transparent;
+        height: 160px;
+        left: 800px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skill-7 {
+        background-color: transparent;
+        height: 160px;
+        left: 1000px;
+        position: absolute;
+        top: 0px;
+        width: 122px;
+      }
+
+      .desktop-1 .skills {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .syracuse-university {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .university-of-mumbai {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .voice-assistant-for {
+        background-color: transparent;
+        left: 0px;
+        position: absolute;
+      }
+
+      .desktop-1 .work-experience {
+        background-color: transparent;
+        position: absolute;
+      }
+
+      .desktop-1 .x1631734179399 {
+        background-color: transparent;
+        height: 124px;
+        left: 0px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 525px;
+      }
+      
+    </style>
+  </head>
+  <body style="margin: 0; background: #ffffff">
+    <input type="hidden" id="anPageName" name="page" value="desktop-1" />
+    <div class="container-center-horizontal">
+      <div class="desktop-1 screen" data-id="1:2">
+        <div class="rectangle-12-Ys8k0x" data-id="35:100"></div>
+        <div class="aditya-subhash-kini-Ys8k0x" data-id="35:102">
+          © Aditya Subhash Kini
+        </div>
+        <div class="contact-me-Ys8k0x contact-me" data-id="35:101">
+          <img
+            class="gmail_icon_2020svg-GxPxir"
+            data-id="35:92"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/gmail-icon--2020--svg@2x.png"
+            alt="Gmail_icon_(2020).svg"
+          /><img
+            class="linked-in_logo_initials-GxPxir"
+            data-id="35:96"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/linkedin-logo-initials@2x.png"
+            alt="LinkedIn_logo_initials"
+          /><img
+            class="microsoft_-office_-o-GxPxir"
+            data-id="35:94"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/microsoft-office-outlook--2018-present--svg@2x.png"
+            alt="Microsoft_Office_Outlook_(2018present).svg"
+          /><img
+            class="github-logo-png_seeklogo-304612-GxPxir github-logo-png_seeklogo-304612"
+            data-id="35:98"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/github-logo-png-seeklogo-304612@2x.png"
+            alt="github-logo-png_seeklogo-304612"
+          />
+          <div
+            class="adityakini7686gmailcom-GxPxir inter-bold-black-24px"
+            data-id="35:93"
+            onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=adityakini7686@gmail.com');"
+            style="cursor: pointer;"
+          >
+            adityakini7686@gmail.com
+          </div>
+          <div class="aditya-kini-GxPxir inter-bold-black-24px" data-id="35:97" onclick="window.open('https://www.linkedin.com/in/aditya-kini', '_blank');"
+          style="cursor: pointer;">
+            Aditya Kini
+          </div>
+          <div
+            class="akini01syredu-GxPxir inter-bold-black-24px"
+            data-id="35:95"
+            onclick="window.open('https://outlook.office.com/mail/deeplink/compose?to=akini01@syr.edu');"
+            style="cursor: pointer;"
+
+          >
+            akini01@syr.edu
+          </div>
+          <div class="kini7686-GxPxir inter-bold-black-24px"  data-id="35:99" onclick="window.open('https://github.com/Kini7686', '_blank');"
+          style="cursor: pointer;"> 
+            Kini7686
+          </div>
+          <div
+            class="contact-me-GxPxir contact-me inter-bold-black-40px"
+            data-id="35:5" id = "contact-section"
+          >
+            Contact Me
+          </div>
+        </div>
+        <div class="skills-Ys8k0x skills" data-id="35:6">
+          <img
+            class="dalle-2024-12-01-210-s6Xmfc"
+            data-id="35:7"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-12-01-21-06-22---a-minimalist-and-elegant-background.png"
+            alt="DALLE 2024-12-01 21.06.22 - A minimalist and elegant background design for a portfolio skills section. The design features a soft gradient transitioning from light gray to white,"
+          />
+          <div class="skills-row-1-s6Xmfc" data-id="35:8">
+            <div class="skill-1" data-id="35:9">
+              <div class="rectangle-11" data-id="35:10"></div>
+              <img
+                class="amazon_-web_-services-logowine-2MmFjr"
+                data-id="35:11"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/amazon-web-services-logo-wine@2x.png"
+                alt="Amazon_Web_Services-Logo.wine"
+              />
+              <div class="aws-2MmFjr inter-bold-black-20px" data-id="35:12">
+                AWS
+              </div>
+            </div>
+            <div class="skill-3" data-id="35:13">
+              <div class="rectangle-11" data-id="35:14"></div>
+              <img
+                class="dalle-2024-12-01-205-gjOMSd dalle-2024-12-01-205"
+                data-id="35:15"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-12-01-20-59-26---a-highly-professional-and-modern-lo@2x.png"
+                alt="DALLE 2024-12-01 20.59.26 - A highly professional and modern logo for a software brand, incorporating a sleek and minimalistic design. The centerpiece features an abstract icon t"
+              />
+              <div class="vapt-gjOMSd inter-bold-black-20px" data-id="35:16">
+                VAPT
+              </div>
+            </div>
+            <div class="skill-4" data-id="35:17">
+              <div class="rectangle-11" data-id="35:18"></div>
+              <img
+                class="html5_logo_and_wordmarksvg-fOr5hl"
+                data-id="35:19"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/html5-logo-and-wordmark-svg@2x.png"
+                alt="HTML5_logo_and_wordmark.svg"
+              />
+              <div class="html-fOr5hl inter-bold-black-20px" data-id="35:20">
+                HTML
+              </div>
+            </div>
+            <div class="skill-5" data-id="35:21">
+              <div class="rectangle-11" data-id="35:22"></div>
+              <img
+                class="x180910-css3-OGfFsB"
+                data-id="35:23"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/180910-css3@2x.png"
+                alt="180910-css3"
+              />
+              <div class="css-OGfFsB inter-bold-black-20px" data-id="35:24">
+                CSS
+              </div>
+            </div>
+            <div class="skill-6" data-id="35:25">
+              <div class="rectangle-11" data-id="35:26"></div>
+              <img
+                class="x82a2188c985ce75402ae44fc43fe7e5e-yEIAOp"
+                data-id="35:27"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/82a2188c985ce75402ae44fc43fe7e5e@2x.png"
+                alt="82a2188c985ce75402ae44fc43fe7e5e"
+              />
+              <div class="python-yEIAOp inter-bold-black-20px" data-id="35:28">
+                Python
+              </div>
+            </div>
+            <div class="skill-7" data-id="35:29">
+              <div class="rectangle-11" data-id="35:30"></div>
+              <img
+                class="java-script-logo-TMt3uq"
+                data-id="35:31"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/javascript-logo@2x.png"
+                alt="JavaScript-Logo"
+              />
+              <div
+                class="java-script-TMt3uq inter-bold-black-20px"
+                data-id="35:32"
+              >
+                JavaScript
+              </div>
+            </div>
+            <div class="skill-2" data-id="35:33">
+              <div class="rectangle-11" data-id="35:34"></div>
+              <img
+                class="mongodb-logo-Q2xPyp"
+                data-id="35:35"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/mongodb-logo@2x.png"
+                alt="mongodb-logo"
+              />
+              <div
+                class="mongo-db-Q2xPyp inter-bold-black-20px"
+                data-id="35:36"
+              >
+                MongoDB
+              </div>
+            </div>
+          </div>
+          <div class="skills-row-3-s6Xmfc" data-id="35:37">
+            <div class="skill-1" data-id="35:38">
+              <div class="rectangle-11" data-id="35:39"></div>
+              <img
+                class="react-iconsvg-oqcLGJ"
+                data-id="35:40"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/react-icon-svg@2x.png"
+                alt="React-icon.svg"
+              />
+              <div
+                class="react-js-oqcLGJ inter-bold-black-20px"
+                data-id="35:41"
+              >
+                ReactJS
+              </div>
+            </div>
+            <div class="skill-3" data-id="35:42">
+              <div class="rectangle-11" data-id="35:43"></div>
+              <img
+                class="sflogo-dYJu46"
+                data-id="35:44"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/sflogo@2x.png"
+                alt="sflogo"
+              />
+              <div
+                class="wireshark-dYJu46 inter-bold-black-20px"
+                data-id="35:45"
+              >
+                Wireshark
+              </div>
+            </div>
+            <div class="skill-4" data-id="35:46">
+              <div class="rectangle-11" data-id="35:47"></div>
+              <img
+                class="word-presscom-logowine-cUbFzr"
+                data-id="35:48"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/wordpress-com-logo-wine@2x.png"
+                alt="WordPress.com-Logo.wine"
+              />
+              <div
+                class="word-press-cUbFzr inter-bold-black-20px"
+                data-id="35:49"
+              >
+                WordPress
+              </div>
+            </div>
+            <div class="skill-5" data-id="35:50">
+              <div class="rectangle-11" data-id="35:51"></div>
+              <img
+                class="x103144151-e4e80780-4-EUvuAe"
+                data-id="35:52"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/103144151-e4e80780-471c-11eb-8f03-ef7b2d65f5cc@2x.png"
+                alt="103144151-e4e80780-471c-11eb-8f03-ef7b2d65f5cc"
+              />
+              <div class="haskell-EUvuAe inter-bold-black-20px" data-id="35:53">
+                Haskell
+              </div>
+            </div>
+            <div class="skill-6" data-id="35:54">
+              <div class="rectangle-11" data-id="35:55"></div>
+              <img
+                class="java_programming_language_logosvg-2z4NEZ"
+                data-id="35:56"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/java-programming-language-logo-svg@2x.png"
+                alt="Java_programming_language_logo.svg"
+              />
+              <div class="java-2z4NEZ inter-bold-black-20px" data-id="35:57">
+                Java
+              </div>
+            </div>
+            <div class="skill-7" data-id="35:58">
+              <div class="rectangle-11" data-id="35:59"></div>
+              <img
+                class="git_iconsvg-fehTlY"
+                data-id="35:60"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/git-icon-svg@2x.png"
+                alt="Git_icon.svg"
+              />
+              <div class="git-fehTlY inter-bold-black-20px" data-id="35:61">
+                Git
+              </div>
+            </div>
+            <div class="skill-2" data-id="35:62">
+              <div class="rectangle-11" data-id="35:63"></div>
+              <img
+                class="github-logo-png_seeklogo-304612-qGwxmS github-logo-png_seeklogo-304612"
+                data-id="35:64"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/github-logo-png-seeklogo-304612-1@2x.png"
+                alt="github-logo-png_seeklogo-304612"
+              />
+              <div class="git-hub-qGwxmS inter-bold-black-20px" data-id="35:65">
+                GitHub
+              </div>
+            </div>
+          </div>
+          <div class="skills-row-2-s6Xmfc" data-id="35:66">
+            <div class="skill-1" data-id="35:67">
+              <div class="rectangle-11" data-id="35:68"></div>
+              <img
+                class="php-logosvg-eO6jYM"
+                data-id="35:69"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/php-logo-svg@2x.png"
+                alt="PHP-logo.svg"
+              />
+              <div class="php-eO6jYM inter-bold-black-20px" data-id="35:70">
+                PHP
+              </div>
+            </div>
+            <div class="skill-3" data-id="35:71">
+              <div class="rectangle-11" data-id="35:72"></div>
+              <img
+                class="my-sql-logowine-iXnhav"
+                data-id="35:73"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/mysql-logo-wine@2x.png"
+                alt="MySQL-Logo.wine"
+              />
+              <div class="my-sql-iXnhav inter-bold-black-20px" data-id="35:74">
+                MySQL
+              </div>
+            </div>
+            <div class="skill-4" data-id="35:75">
+              <div class="rectangle-11" data-id="35:76"></div>
+              <img
+                class="x85f69649-5387-44c2-b-1zo1MZ"
+                data-id="35:77"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/85f69649-5387-44c2-ba45-81ae13812e36-cover@2x.png"
+                alt="85f69649-5387-44c2-ba45-81ae13812e36-cover"
+              />
+              <div class="figma-1zo1MZ inter-bold-black-20px" data-id="35:78">
+                Figma
+              </div>
+            </div>
+            <div class="skill-5" data-id="35:79">
+              <div class="rectangle-11" data-id="35:80"></div>
+              <img
+                class="c_-logo-jEjKOF"
+                data-id="35:81"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/c-logo@2x.png"
+                alt="C_Logo"
+              />
+              <div class="c-jEjKOF c inter-bold-black-20px" data-id="35:82">
+                C
+              </div>
+            </div>
+            <div class="skill-6" data-id="35:83">
+              <div class="rectangle-11" data-id="35:84"></div>
+              <img
+                class="cpp_logo-ghy84x"
+                data-id="35:85"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/cpp-logo@2x.png"
+                alt="cpp_logo"
+              />
+              <div class="c-ghy84x c inter-bold-black-20px" data-id="35:86">
+                C++
+              </div>
+            </div>
+            <div class="skill-7" data-id="35:87">
+              <div class="rectangle-11" data-id="35:88"></div>
+              <img
+                class="jupyter_logosvg-y3uuAN"
+                data-id="35:89"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/jupyter-logo-svg@2x.png"
+                alt="Jupyter_logo.svg"
+              />
+              <div class="jupyter-y3uuAN inter-bold-black-20px" data-id="35:90">
+                Jupyter
+              </div>
+            </div>
+          </div>
+          <div
+            class="skills-s6Xmfc skills inter-bold-black-40px"
+            data-id="35:91"
+          >
+            SKILLS
+          </div>
+        </div>
+        <div class="postion-of-responsibility-Ys8k0x" data-id="27:83">
+          <div class="rk-broadband-mxW1Rc" data-id="21:77">
+            <a
+    href="Documents/RK Broadband.pdf"
+    target="_blank"
+    class="certificate-H4voPY certificate inter-normal-purple-heart-20px"
+    data-id="21:78"
+    style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+  >
+    Certificate -&gt;
+  </a>
+            <img
+              class="dalle-2024-12-01-214-H4voPY dalle-2024-12-01-214"
+              data-id="21:79"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-12-01-21-44-49---a-simple-and-elegant-illustration-r.png"
+              alt="DALLE 2024-12-01 21.44.49 - A simple and elegant illustration representing the role of a senior manager at RK Broadband and Samata Cable Network. The design features a minimalist"
+            />
+            <p
+              class="senior-manager-rk-br-H4voPY inter-bold-black-32px"
+              data-id="21:80"
+            >
+              <span class="span0-ox89iB inter-bold-black-32px"
+                >Senior Manager, </span
+              ><span class="span1-ox89iB inter-normal-black-20px"
+                >RK Broadband and Samata Cable Network</span
+              >
+            </p>
+            <p
+              class="may-2019-apr-2021-H4voPY inter-normal-black-20px"
+              data-id="21:81"
+            >
+              June 2023 – July 2024
+            </p>
+            <p
+              class="conducted-router-mon-H4voPY inter-normal-black-20px"
+              data-id="21:82"
+            >
+              • Conducted router monitoring and implemented cybersecurity
+              measures, including VAPT (Vulnerability Assessment and Penetration
+              Testing).<br /><br />• Managed a team of 9 employees, ensuring
+              efficient daily operations.<br /><br />• Coordinated projects,
+              meeting deadlines and maintaining quality standards.
+            </p>
+          </div>
+          <div class="finance-head-csi-mxW1Rc" data-id="18:71">
+            <a
+    href="Documents/CSI.pdf"
+    target="_blank"
+    class="certificate-mwGuaO certificate inter-normal-purple-heart-20px"
+    data-id="18:72"
+    style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+  >
+    Certificate -&gt;
+  </a>
+            <img
+              class="dalle-2024-12-01-214-mwGuaO dalle-2024-12-01-214"
+              data-id="18:73"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-12-01-21-42-12---a-minimalistic-and-elegant-illustra.png"
+              alt="DALLE 2024-12-01 21.42.12 - A minimalistic and elegant illustration featuring the Computer Society of India (CSI) logo prominently. The design includes a clean white background w"
+            />
+            <div
+              class="finance-head-csi-slrtce-mwGuaO inter-bold-black-32px"
+              data-id="18:74"
+            >
+              <span class="span0-QlR1Go inter-bold-black-32px"
+                >Finance Head, </span
+              ><span class="span1-QlR1Go inter-normal-black-20px"
+                >CSI-SLRTCE</span
+              >
+            </div>
+            <div
+              class="may-2021-apr2022-mwGuaO may-2021-apr2022 inter-normal-black-20px"
+              data-id="18:75"
+            >
+              May 2021 – Apr2022
+            </div>
+            <p
+              class="managed-the-committe-mwGuaO inter-normal-black-20px"
+              data-id="18:76"
+            >
+              • Managed the committee’s budget and financial planning for events
+              and competitions.<br /><br />• Organized orientations and
+              competitive events, handling budgeting and sponsorships.<br /><br />•
+              Led fundraising efforts, securing sponsorships to support
+              committee activities.
+            </p>
+          </div>
+          <div
+            class="positions-of-responsibility-mxW1Rc inter-bold-black-40px"
+            data-id="11:68"
+          >
+            POSITIONS OF RESPONSIBILITY
+          </div>
+        </div>
+        <div class="publication-Ys8k0x publication" data-id="11:67">
+          <div class="pub-6YFYgR" data-id="11:70">
+            <div class="publication-2-lBisNW" data-id="11:66">
+              <div class="rectangle-9-Z1Skk5" data-id="11:61"></div>
+              <img
+                class="dalle-2024-11-27-025"
+                data-id="11:62"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-27-02-55-15---a-professional-and-clean-rectangula@2x.png"
+                alt="DALLE 2024-11-27 02.55.15 - A professional and clean rectangular logo design for the International Journal of Scientific Research in Computer Science, Engineering, and Informatio"
+              />
+              <p class="published-a-paper-on" data-id="11:63">
+                <span class="span0-yMTPKA inter-normal-black-16px"
+                  >Published a paper on “OSINT Automation Application” in
+                  International Journal of Scientific Research in Computer
+                  Science,&nbsp;&nbsp;Engineering and Information Technology
+                  (IJSRCSEIT) </span
+                ><span class="span1-yMTPKA">Impact Factor = 7.254</span
+                ><span class="span2-yMTPKA inter-normal-black-16px">.</span>
+              </p>
+              <div class="link inter-normal-purple-heart-20px" data-id="11:64" onclick="window.open('https://ijsrcseit.com/paper/CSEIT232551.pdf', '_blank');"
+              style="cursor: pointer;" onmouseover="this.style.textDecoration='underline';"
+              onmouseout="this.style.textDecoration='none';">
+                Link -&gt;
+              </div>
+            </div>
+            <div class="publication-1-lBisNW" data-id="11:65">
+              <div class="rectangle-6-qIGQ6T" data-id="11:56"></div>
+              <img
+                class="dalle-2024-11-27-025"
+                data-id="11:59"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-27-02-51-07---a-professional-and-clean-rectangula@2x.png"
+                alt="DALLE 2024-11-27 02.51.07 - A professional and clean rectangular logo design for the International Journal of Advance and Innovative Research (IJAIR). The logo features the text "
+              />
+              <p class="published-a-paper-on" data-id="11:58">
+                <span class="span0-nFjAu0 inter-normal-black-16px"
+                  >Published a paper on “CAR AND HOUSE PRICE PREDICTION USING
+                  LINEAR, LASSO AND RIDGE REGRESSION”
+                  in&nbsp;&nbsp;International Journal of Advance and Innovative
+                  Research Volume 8, Issue 4 (IX) </span
+                ><span class="span1-nFjAu0">Impact Factor = 8.126</span
+                ><span class="span2-nFjAu0 inter-normal-black-16px">.</span>
+              </p>
+              <div class="link inter-normal-purple-heart-20px" data-id="11:60" onclick="window.open('https://iaraedu.com/pdf/ijair-volume-8-issue-4-ix-october-december-2021.pdf#page=81', '_blank');"
+              style="cursor: pointer;" onmouseover="this.style.textDecoration='underline';"
+              onmouseout="this.style.textDecoration='none';">
+                Link -&gt;
+              </div>
+            </div>
+          </div>
+          <div
+            class="publication-6YFYgR publication inter-bold-black-40px"
+            data-id="7:55"
+          >
+            PUBLICATION
+          </div>
+        </div>
+        <div class="project-Ys8k0x" data-id="7:54">
+          <div class="geo-location-7ro0tq geo-location" data-id="48:2">
+            <div
+  class="read-more-HXaivh read-more inter-normal-purple-heart-20px"
+  data-id="48:3"
+>
+  <a
+    href="Documents/Geolocation.pdf"
+    target="_blank"
+    style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+  >
+    Read More -&gt;
+  </a>
+</div>
+
+            <img
+              class="dalle-2024-12-01-204-HXaivh"
+              data-id="48:4"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-12-01-20-42-40---a-sleek-and-modern-geolocation-appl.png"
+              alt="DALLE 2024-12-01 20.42.40 - A sleek and modern geolocation application interface displayed on a smartphone screen. The design includes a detailed interactive map with markers and"
+            />
+            <div
+              class="geo-location-HXaivh geo-location inter-bold-black-32px"
+              data-id="48:5"
+            >
+              GeoLocation
+            </div>
+            <p
+              class="nov-2020-apr-2021-HXaivh inter-normal-black-20px"
+              data-id="48:6"
+            >
+              Nov 2020 – Apr 2021
+            </p>
+            <p
+              class="enables-real-time-lo-HXaivh inter-normal-black-20px"
+              data-id="48:7"
+            >
+              • Enables real-time location tracking, distance calculations, and
+              interactive route mapping using GPS and geolocation
+              tools.&nbsp;&nbsp;<br /><br />• Provides detailed carrier, region,
+              and country insights for phone numbers, with visual location
+              mapping.<br /><br />• Offers voice-assisted navigation with
+              interactive HTML maps for a user-friendly experience.
+            </p>
+          </div>
+          <div
+            class="voice-assistant-for-7ro0tq voice-assistant-for"
+            data-id="7:48"
+          >
+          <div
+          class="read-more-XTE8Mq read-more inter-normal-purple-heart-20px"
+          data-id="7:49"
+        >
+          <a
+            href="Documents/Voice Assistant.pdf"
+            target="_blank"
+            style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+          >
+            Read More -&gt;
+          </a>
+        </div>
+            <img
+              class="dalle-2024-11-27-015"
+              data-id="7:50"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-27-01-55-36---a-conceptual-illustration-of-a-mobi.png"
+              alt="DALLE 2024-11-27 01.55.36 - A conceptual illustration of a mobile application designed as a voice assistant for visually impaired people, presented in a rectangular frame. The ap"
+            />
+            <p
+              class="voice-assistant-for-XTE8Mq voice-assistant-for inter-bold-black-32px"
+              data-id="7:51"
+            >
+              Voice Assistant for Visually Impaired People
+            </p>
+            <p
+              class="may-2020-apr-2021-XTE8Mq inter-normal-black-20px"
+              data-id="7:52"
+            >
+              May 2020 – Apr 2021
+            </p>
+            <p
+              class="constructed-a-python-XTE8Mq inter-normal-black-20px"
+              data-id="7:53"
+            >
+              • Constructed a Python application operating 10+ libraries to
+              assist visually impaired individuals in accessing
+              daily&nbsp;&nbsp;information and services, boosting ability to
+              engage with surroundings.&nbsp;&nbsp;<br /><br />• Achieved
+              finalist status in the Innovation 2021 competition, showcasing
+              app&#39;s impact and usability.
+            </p>
+          </div>
+          <div
+            class="voice-assistant-for-ey77kX voice-assistant-for"
+            data-id="51:8"
+          >
+          <div
+          class="read-more-7TaRNP read-more inter-normal-purple-heart-20px"
+          data-id="51:9"
+        >
+          <a
+            href="Documents/Stegno.pdf"
+            target="_blank"
+            style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+          >
+            Read More -&gt;
+          </a>
+        </div>
+            <img
+              class="dalle-2024-12-01-205-7TaRNP dalle-2024-12-01-205"
+              data-id="51:10"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-12-01-20-56-16---an-abstract-concept-illustration-of.png"
+              alt="DALLE 2024-12-01 20.56.16 - An abstract concept illustration of steganography, featuring a digital file icon (like an envelope or folder) with hidden data visually represented as"
+            />
+            <div
+              class="stegnography-7TaRNP inter-bold-black-32px"
+              data-id="51:11"
+            >
+              Stegnography
+            </div>
+            <p
+              class="hide-secret-messages-7TaRNP inter-normal-black-20px"
+              data-id="51:13"
+            >
+              • Hide secret messages within images using Python&#39;s Tkinter
+              and PIL libraries.&nbsp;&nbsp;<br /><br />• Encode and decode
+              messages securely with an intuitive GUI and pixel-based
+              encryption.<br /><br />• Supports customizable outputs with
+              user-friendly options for saving and retrieving stego images.<br /><br />•
+              Ensures message security by combining steganography techniques
+              with user-defined encryption algorithms.
+            </p>
+          </div>
+          <div
+            class="house-and-car-price-7ro0tq house-and-car-price"
+            data-id="3:42"
+          >
+          <div
+          class="read-more-LxpVQw read-more inter-normal-purple-heart-20px"
+          data-id="3:47"
+        >
+          <a
+            href="Documents/House and Car Price Prediction.pdf"
+            target="_blank"
+            style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+          >
+            Read More -&gt;
+          </a>
+        </div>
+            <img
+              class="dalle-2024-11-27-014-LxpVQw"
+              data-id="3:43"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-27-01-48-16---a-simple-and-effective-image-divide.png"
+              alt="DALLE 2024-11-27 01.48.16 - A simple and effective image divided in half. The left side shows a modern, modest house with a clean design, solar panels on the roof, and a subtle o"
+            />
+            <p
+              class="house-and-car-price-LxpVQw house-and-car-price inter-bold-black-32px"
+              data-id="3:44"
+            >
+              House and Car Price Prediction Using Regression
+            </p>
+            <div
+              class="may-2021-apr2022-LxpVQw may-2021-apr2022 inter-normal-black-20px"
+              data-id="3:45"
+            >
+              May 2021 – Apr2022
+            </div>
+            <p
+              class="created-a-web-applic-LxpVQw inter-normal-black-20px"
+              data-id="3:46"
+            >
+              • Created a web application for buying and analyzing leveraged
+              cars and houses operating three regression modules:
+              linear&nbsp;&nbsp;regression, lasso regression, and ridge
+              regression.&nbsp;&nbsp;<br /><br />• Achieved 2nd place in the
+              Innovation 2022 project competition, with project attaining an R²
+              score of 0.92 for house price&nbsp;&nbsp;prediction and 0.95 for
+              car price prediction.
+            </p>
+          </div>
+          <div
+            class="osint-automation-application-7ro0tq osint-automation-application"
+            data-id="3:31"
+          >
+          <div
+          class="read-more-lLsFAR read-more inter-normal-purple-heart-20px"
+          data-id="3:37"
+        >
+          <a
+            href="Documents/OSINT Automation Application.pdf"
+            target="_blank"
+            style="text-decoration: none; padding: 10px 20px; background-color: #6a0dad; color: white; border-radius: 5px; display: inline-block;"
+          >
+            Read More -&gt;
+          </a>
+        </div>
+            <img
+              class="dalle-2024-11-27-015"
+              data-id="3:32"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-27-01-58-21---a-sleek-blackhat-logo-design-in-bla.png"
+              alt="DALLE 2024-11-27 01.58.21 - A sleek Blackhat logo design in black and white (or black and gray). The design features a silhouette of a person wearing a black hat, outlined in sha"
+            />
+            <div
+              class="osint-automation-application-lLsFAR osint-automation-application inter-bold-black-32px"
+              data-id="3:33"
+            >
+              OSINT Automation Application
+            </div>
+            <p
+              class="may-2022-apr-2023-lLsFAR inter-normal-black-20px"
+              data-id="3:34"
+            >
+              May 2022 – Apr 2023
+            </p>
+            <p
+              class="developed-an-efficie-lLsFAR inter-normal-black-20px"
+              data-id="3:35"
+            >
+              • Developed an efficient application using the OSINT Framework to
+              gather and analyze publicly accessible data,
+              identifying&nbsp;&nbsp;potential data leaks and vulnerabilities
+              across over 1,000+ online sources.&nbsp;&nbsp;<br /><br />•
+              Demonstrated project idea at WEschool&#39;s 4th International
+              Conference, showcasing 6 modules designed to skim
+              secured&nbsp;&nbsp;data and files across internet.
+            </p>
+          </div>
+          <div class="projects-7ro0tq inter-bold-black-40px" data-id="3:30">
+            PROJECTS
+          </div>
+        </div>
+        <div class="work-experience-Ys8k0x work-experience" data-id="3:29">
+          <div class="aws-intern-rJ2J6T" data-id="3:24">
+            <img
+              class="rectangle-4"
+              data-id="3:25"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/rectangle-4.svg"
+              alt="Rectangle 4"
+            />
+            <p
+              class="aws-internship-cloud-intern-slrtce-VvcezU inter-bold-black-32px"
+              data-id="3:26"
+            >
+              <span class="span0-fuhDAV inter-bold-black-32px"
+                >AWS Internship (Cloud) Intern, </span
+              ><span class="span1-fuhDAV inter-normal-black-20px">SLRTCE</span>
+            </p>
+            <p
+              class="jul-2022-aug-2022-VvcezU inter-normal-black-20px"
+              data-id="3:27"
+            >
+              Jul 2022 – Aug 2022
+            </p>
+            <p
+              class="created-an-aws-proje-VvcezU inter-normal-black-20px"
+              data-id="3:28"
+            >
+              • Created an AWS project for a blog using Course Foundation lab,
+              implementing a three-tier architecture and hosting
+              a&nbsp;&nbsp;single-page web application built on WordPress.<br /><br />•
+              Optimized cloud resources using AWS S3 lifecycle policies and
+              automated deployment pipelines with CodePipeline, reducing costs
+              by 30% and deployment time by 50%.
+            </p>
+          </div>
+          <div class="cyber-security-intern-rJ2J6T" data-id="3:23">
+            <img
+              class="resized_image_525x363-LgsPCY"
+              data-id="3:17"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/resized-image-525x363.png"
+              alt="resized_image_525x363"
+            />
+            <div
+              class="cyber-security-intern-slrtce-LgsPCY inter-bold-black-32px"
+              data-id="3:18"
+            >
+              <span class="span0-ivHDqJ inter-bold-black-32px"
+                >Cyber Security Intern, </span
+              ><span class="span1-ivHDqJ inter-normal-black-20px">SLRTCE</span>
+            </div>
+            <p
+              class="nov-2022-jan-2023-LgsPCY inter-normal-black-20px"
+              data-id="3:21"
+            >
+              Nov 2022 – Jan 2023
+            </p>
+            <p
+              class="acquired-knowledge-o-LgsPCY inter-normal-black-20px"
+              data-id="3:22"
+            >
+              • Acquired knowledge of various analytical tools, including
+              Wireshark, web crawling, and forensic techniques, to
+              identify,&nbsp;&nbsp;trace, and recover over 200 log
+              records.&nbsp;&nbsp;<br /><br />• Structured on router monitoring
+              and Vulnerability Assessment and Penetration Testing (VAPT),
+              conducting assessments&nbsp;&nbsp;on 5+ network devices,
+              contributing to a 30% improvement in network security.
+            </p>
+          </div>
+          <div class="uiux-intern-rJ2J6T" data-id="3:19">
+            <img
+              class="rectangle-4"
+              data-id="3:13"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/rectangle-4-1.svg"
+              alt="Rectangle 4"
+            />
+            <p
+              class="uiux-intern-basket-h-HaWVKk inter-bold-black-32px"
+              data-id="3:15"
+            >
+              <span class="span0-oOoAqn inter-bold-black-32px"
+                >UI/UX Intern, </span
+              ><span class="span1-oOoAqn inter-normal-black-20px"
+                >BasketHunt pvt ltd – Jharkhand</span
+              >
+            </p>
+            <p
+              class="sep-2023-nov-2023-HaWVKk inter-normal-black-20px"
+              data-id="3:20"
+            >
+              Sep 2023 – Nov 2023
+            </p>
+            <p
+              class="designed-and-prototy-HaWVKk inter-normal-black-20px"
+              data-id="3:16"
+            >
+              • Designed and prototyped 100% of Android, iOS, and web
+              applications with a team of 4 trainees for the School of
+              Learning&nbsp;&nbsp;and iLearn website, contributing to a cohesive
+              user experience.&nbsp;&nbsp;<br /><br />• Developed a
+              comprehensive understanding of UI flow and design principles,
+              enhancing overall user interaction. <br /><br />• Collaborated in
+              2 live project, focusing on designing user interfaces and logos
+              while enhancing user experiences for&nbsp;&nbsp;company.
+            </p>
+          </div>
+          <div
+            class="work-experience-rJ2J6T work-experience inter-bold-black-40px"
+            data-id="3:6"
+          >
+            WORK EXPERIENCE
+          </div>
+        </div>
+        <div class="education-Ys8k0x education" data-id="1:30">
+          <div
+            class="syracuse-university-ltTaF9 syracuse-university"
+            data-id="1:24"
+          >
+            <div class="rectangle-3" data-id="1:18"></div>
+            <img
+              class="x1631734179399"
+              data-id="1:20"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/1631734179399.png"
+              alt="1631734179399"
+            />
+            <div
+              class="syracuse-university-DNxZhy syracuse-university inter-bold-black-32px"
+              data-id="1:22"
+            >
+              Syracuse University
+            </div>
+            <div class="masters-of-computer-science-DNxZhy" data-id="1:23">
+              Master’s of Computer Science
+            </div>
+            <div class="gpa-4040-DNxZhy inter-normal-black-16px" data-id="3:4">
+              GPA: 3.45/4.0
+            </div>
+            <p
+              class="aug-2024-may-2026-DNxZhy inter-normal-black-16px"
+              data-id="3:5"
+            >
+              Aug 2024 - May 2026
+            </p>
+          </div>
+          <div
+            class="university-of-mumbai-ltTaF9 university-of-mumbai"
+            data-id="1:25"
+          >
+            <div class="rectangle-3" data-id="1:26"></div>
+            <img
+              class="x1631734179399"
+              data-id="1:27"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+              anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/1631734179399-1.png"
+              alt="1631734179399"
+            />
+            <div
+              class="university-of-mumbai-TqhPAF university-of-mumbai inter-bold-black-32px"
+              data-id="1:28"
+            >
+              University of Mumbai
+            </div>
+            <p class="bachelors-of-enginee-TqhPAF" data-id="1:29">
+              Bachelor’s of Engineering in Computer Engineering
+            </p>
+            <div class="gpa-88910-TqhPAF inter-normal-black-16px" data-id="3:2">
+              GPA: 8.89/10
+            </div>
+            <p
+              class="aug-2019-may-2023-TqhPAF inter-normal-black-16px"
+              data-id="3:3"
+            >
+              Aug 2019 - May 2023
+            </p>
+          </div>
+          <div
+            class="education-ltTaF9 education inter-bold-black-40px"
+            data-id="1:19"
+          >
+            EDUCATION
+          </div>
+        </div>
+        <img
+          class="dalle-2024-11-28-191-Ys8k0x"
+          data-id="1:12"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+          anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-28-19-13-48---a-futuristic-technology-background-.png"
+          alt="DALLE 2024-11-28 19.13.48 - A futuristic technology background in landscape orientation, with a dark blue background transitioning from deep navy to midnight blue. The image feat"
+        />
+        <!-- <marquee direction="right" loop="1" style="color: rgb(211, 211, 211);">This portfolio is currently under development.</marquee> -->
+        <div class="rectangle-13-Ys8k0x" data-id="88:89"></div>
+        <div class="about-Ys8k0x" data-id="3:9">
+          <div class="im-9YZhBH" data-id="1:14">I’m</div>
+          <h1 class="title-9YZhBH" data-id="1:15">Aditya Kini</h1>
+          <p class="software-developer-w-9YZhBH" data-id="1:16">
+            Software Developer | Web Development | Cyber Security Enthusiast
+          </p>
+          <div class="syracuse-ny-9YZhBH" data-id="1:17">Syracuse, NY</div>
+        </div>
+        <div class="navbar-Ys8k0x" data-id="1:11">
+          <div class="home-bUOcCU inter-normal-white-24px" data-id="1:7">
+            Home
+          </div>
+          <div class="contact-bUOcCU inter-normal-white-24px" data-id="1:9" onclick="document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' });" style="cursor: pointer;">
+            Contact
+          </div>
+          <div class="resume-bUOcCU inter-normal-white-24px" data-id="1:10" onclick="window.open('Documents/AdityaKini Job Resume.pdf', '_blank')">
+            Resume
+          </div>
+        </div>
+        <img
+          class="dalle-2024-11-28-192-Ys8k0x"
+          data-id="37:103"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+          anima-src="https://cdn.animaapp.com/projects/6782f8f4b82372baae34464e/releases/6782f96bb82372baae34464f/img/dall-e-2024-11-28-19-24-38---a-modern--sleek-logo-featuring-the-.png"
+          alt="DALLE 2024-11-28 19.24.38 - A modern, sleek logo featuring the letters 'A' and 'K' creatively integrated together. The design should be minimalistic and professional, using bold  1"
+        />
+      </div>
+    </div>
+    <script src="launchpad-js/launchpad-banner.js" async></script>
+    <script
+      defer
+      src="https://animaapp.s3.amazonaws.com/static/restart-btn.min.js"
+    ></script>
+  </body>
+</html>
